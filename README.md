@@ -26,7 +26,7 @@
 
 ## 🔗 預覽 Preview
 
-👉 點擊這裡查看網站：[GitHub Pages 連結或部屬網址]
+👉 點擊這裡查看網站：[[Yun-Xin Lee's](https://yunxin0118.github.io/website/)]
 
 ---
 
