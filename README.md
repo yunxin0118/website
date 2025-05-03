@@ -24,14 +24,6 @@
 
 ---
 
-## 📁 專案結構 Project Structure
-├── index.html # 主頁面
-├── style.css # 自訂樣式
-├── about.jpg # 背景圖片
-├── resume.pdf # 履歷檔案
-├── /images # 網頁中使用的圖片
-└── README.md # 專案說明檔
-
 ## 🔗 預覽 Preview
 
 👉 點擊這裡查看網站：[GitHub Pages 連結或部屬網址]
