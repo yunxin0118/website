@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.118.2">
+    <title>Yun Xin Lee"s Website</title>
+
+
+    <!-- 引入 Font Awesome CDN：請放在 <head> 中 -->
+      
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
+
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+
+
+      .timeline {
+        position: relative;
+        margin: 4rem auto;
+        padding: 3rem 0;
+        width: 80%;
+        max-width: 900px;
+      }
+
+      .timeline::before {
+        content: '';
+        position: absolute;
+        left: 100%;
+        width: 4px;
+        height: 100%;
+        background-color: #cccccc;
+        transform: translateX(-50%);
+      }
+
+      .timeline-item {
+        position: relative;
+        width: 50%;
+        padding: 1.5rem 2.5rem;
+        box-sizing: border-box;
+      }
+
+      .timeline-item.left {
+        left: 0;
+        text-align: right;
+      }
+
+      .timeline-item.right {
+        left: 50%;
+        text-align: left;
+      }
+
+      .timeline-item::before {
+        content: '';
+        position: absolute;
+        top: 1.5rem;
+        width: -20px;  /* 增大圓形 */
+        height: -20px; /* 增大圓形 */
+        background-color: #000000;
+        border: 3px solid #000000; /* 改為較深顏色 */
+        border-radius: 50%;
+        z-index: 1;
+      }
+
+      .timeline-item.left::before {
+        right: -268px;
+      }
+
+      .timeline-item.right::before {
+        left: 246px;
+      }
+
+      .timeline-item::before {
+        display: none;
+      }
+
+      .timeline-content {
+        background-color: rgba(255, 255, 255, 0.85);
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+        display: inline-block;
+        width: 200%;
+        margin-left: 10rem;
+
+        /* 動畫起始狀態 */
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease-out;
+      }
+
+      /* 當加上 .animate 類別時觸發淡入動畫 */
+      .timeline-content.animate {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .timeline-content h5 {
+        font-size: 1.25rem; /* 調整標題字體大小 */
+        margin-bottom: 1rem;
+      }
+
+      .timeline-content ul {
+        padding-left: 1.2rem;   /* 微調縮排 */
+        margin: 0;
+        list-style-position: inside; /* 讓小圓點在同一行內 */
+      }
+
+      .timeline-content ul li {
+        margin-bottom: 0.5rem;
+        font-size: 1rem; /* 增加文字大小 */
+      }
+
+      .timeline-content a.btn {
+        display: inline-block;
+        margin-top: 1rem;
+        font-size: 0.95rem;
+      }
+
+      .typing-text {
+          font-family: 'Courier New', Courier, monospace;
+        }
+
+    /* 滑鼠移過去變色 */
+        a:hover {
+        color: #ff7f50; /* 改成你喜歡的顏色 */
+        text-decoration: underline; /* 可選，讓文字有下劃線 */
+        }
+
+        /* 預設顏色 */
+        a {
+        color: #ffffff; /* 預設為黑色字 */
+        }
+
+        /* 避免首頁的文字會變色 */
+        a.navbar-brand {
+        color: #ffffff;
+        }
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .btn-bd-primary {
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #5a23c8;
+        --bs-btn-active-border-color: #5a23c8;
+      }
+
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+    </style>
+
+    
+  </head>
+  <body>
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+      <symbol id="check2" viewBox="0 0 16 16">
+        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+      </symbol>
+      <symbol id="circle-half" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+      </symbol>
+      <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+        <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+      </symbol>
+      <symbol id="sun-fill" viewBox="0 0 16 16">
+        <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+      </symbol>
+    </svg>
+    
+<header data-bs-theme="dark">
+  <div class="collapse text-bg-dark" id="navbarHeader">
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a href="#" class="navbar-brand d-flex align-items-center text-decoration-none">
+        <i class="fas fa-cloud-moon me-2"></i>
+        <span class="mx-2 fs-6"><strong>首頁 Homepage</strong></span>
+      </a>
+        <a href="#about" class="ms-4 me-4 fs-6 text-decoration-none">關於我 About</a>
+        <a href="#interests" class="ms-3 me-4 fs-6 text-decoration-none">興趣 Interests</a>
+        <a href="#education" class="ms-3 me-4 fs-6 text-decoration-none">大學在學經歷 Education</a>
+        <a href="#work" class="ms-3 me-4 fs-6 text-decoration-none">工作經驗 Work Experience</a>
+        <a href="#contact" class="ms-3 me-4 fs-6 text-decoration-none">聯絡我 Contact</a>
+      </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="py-5 text-center container-fluid" style="background-image:url('MEITU_20250502_125601897.jpg'); background-size: cover; background-position: center; background-attachment: fixed; width: 100%; height: 100vh;">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <div style="background-color: rgba(255, 255, 255, 0.85); padding: 2rem; border-radius: 1rem;">
+          
+          <!-- 圓形個人照片（放大） -->
+          <img src="1000037268.jpg" alt="個人照片" class="rounded-circle mb-3" style="width: 180px; height: 180px; object-fit: cover;">
+  
+          <!-- 名字字體變小 -->
+          <h1 class="fw-light text-dark" style="font-size: 1.5rem;"><strong>李勻歆 Yun-xin Lee</strong></h1>
+  
+          <p class="lead text-dark fs-7"><strong>一個充滿好奇心，喜歡探索的人。</strong></p>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5"  id="about" style="background-color: #77688e9d;">
+    <div class="container">
+      <div class="row align-items-center">
+        
+        <!-- 文字區塊 -->
+        <div class="col-md-7">
+          <h2><strong>關於我</strong></h2>
+          <p class="mt-3 fs-5 typing-text" style="white-space: pre-wrap;"></p>
+          <p class="mt-3 fs-6" style="color: #ffffff;">
+            我是一個充滿好奇心的人，喜歡探索，也樂於從實際互動中累積自己的經驗。個性溫和細膩、對人有耐心，也習慣將複雜的事情拆解與規劃。
+            從雙主修資訊工程、參與專案實習、到實際接觸用戶與內容，我一步步確定自己想走向資訊與科技應用的道路。
+            我不是會追求一蹴可幾的人，但我重視效率與負責任的執行力，願意在過程中不斷嘗試與調整。我相信這樣的特質，能讓我成為團隊中可靠的一份子，也期待在未來持續探索、貢獻並成長。
+          </p>
+        </div>
+  
+        <!-- 圖片區塊 -->
+        <div class="col-md-5 text-center mt-4 mt-md-0">
+          <img src="about.jpg" alt="個人照片" class="rounded-circle img-fluid shadow" style="max-width: 250px; height: auto; border: 4px solid #fff;">
+          <!-- 小圖示 -->
+          <div class="position-absolute bottom-0 start-50 translate-middle-x">
+            <i class="fas fa-book fa-lg text-white me-2"></i>
+            <i class="fas fa-star fa-lg text-white me-2"></i>
+            <i class="fas fa-heart fa-lg text-white me-2"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="album py-5"  id="education" style="position: relative; overflow: hidden;">
+    <!-- 背景圖層 -->
+    <div style="
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('250064.jpg') center center / cover no-repeat;
+      opacity: 0.8;
+      z-index: 1;
+    "></div>
+  
+    <!-- 主要內容層 -->
+    <div class="container" style="position: relative; z-index: 2;">
+      <div class="row align-items-center">
+        
+        <!-- 文字區塊 -->
+        <div class="col-md-7">
+          <h2 style="color: rgb(0, 0, 0);"><strong>大學在學經歷</strong></h2>
+  
+          <div class="timeline">
+            <div class="timeline-item left">
+              <div class="timeline-image">
+                <img src="249880.jpg" alt="大一圖片" class="img-thumbnail" style="width: 250px; height: auto; margin-left: 200px;">
+              </div>
+              <div class="timeline-content">
+                <h5><strong>大一上下學期</strong></h5>
+                <ul>
+                  <li>杏林管弦樂團大提琴手</li>
+                </ul>
+              </div>
+            </div>
+            <div class="timeline-item right">
+              <div class="timeline-image">
+                <img src="249881.jpg" alt="大二圖片" class="img-thumbnail" style="width: 250px; height: auto; margin-left: 300px;">
+              </div>
+              <div class="timeline-content">
+                <h5><strong>大二上學期</strong></h5>
+                <ul>
+                  <li>頭前國中課後輔導老師</li>
+                  <li>科技系學會行銷股</li>
+                </ul>
+              </div>
+            </div>
+            <div class="timeline-item left">
+              <div class="timeline-image">
+                <img src="249882.jpg" alt="大二圖片" class="img-thumbnail" style="width: 250px; height: auto; margin-left: 200px;">
+              </div>
+              <div class="timeline-content">
+                <h5><strong>大二下學期</strong></h5>
+                <ul>
+                  <li>程式語言課堂助教</li>
+                  <li>團隊參與資工系黑客松 24hrs 遊戲競賽</li>
+                </ul>
+              </div>
+            </div>
+            <div class="timeline-item right">
+              <div class="timeline-image">
+                <img src="249883.jpg" alt="大三圖片" class="img-thumbnail" style="width: 250px; height: auto; margin-left: 300px;">
+              </div>
+              <div class="timeline-content">
+                <h5><strong>大三上學期</strong></h5>
+                <ul>
+                  <li>2024 郵政大數據競賽團隊優等</li>
+                  <li>參與教育 AI 學習平台系統開發</li>
+                  <a href="https://github.com/NTNU-SoftwareEngineering" class="btn btn-outline-secondary mt-3" target="_blank">查看更多</a>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+
+  <div class="album py-5"  id="work" style="background-color: #000000;">
+    <div class="container">
+      <div class="row align-items-center">
+        
+        <div class="col-md-12">
+          <h2 style="color: white;"><strong>工作經驗</strong></h2>
+          <a href="resume.pdf" class="btn btn-outline-light" target="_blank">
+            查看個人履歷
+          </a>
+          <p class="mt-3 fs-5 typing-text" style="white-space: pre-wrap;"></p>
+          <div class="row">
+
+            <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="0" data-aos-duration="800">
+              <div class="card shadow-sm">
+                <a href="https://www.study123.com.tw/" target="_blank">
+                  <img src="work1.jpg" class="card-img-top" alt="工作經驗圖片" width="100%" height="225">
+                </a>
+                <div class="card-body">
+                  <h5 class="card-title"><strong>課輔導師 / 電訪人員</strong></h5>
+                  <p class="card-text">線上教學平台課輔導師，協助用戶熟悉系統操作，以及學生課業上的協助。聯繫潛在用戶，針對公司教育產品進行電話行銷。</p>
+                  <p class="card-text">此經驗培養我在科技教育產品的應用、客戶溝通與系統問題解決的能力。</p>
+                  <p class="card-text"><strong>學習王科技股份有限公司</strong> 2023/1~2023/2 (寒假期間)</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="0" data-aos-duration="800">
+              <div class="card shadow-sm">
+                <a href="https://www.americanclub.org.tw/" target="_blank">
+                  <img src="work2.jpg" class="card-img-top" alt="工作經驗圖片" width="100%" height="225">
+                </a>
+                <div class="card-body">
+                  <h5 class="card-title"><strong>餐飲服務生</strong></h5>
+                  <p class="card-text">於美式餐廳擔任外場服務生，接待、點餐、上餐與飲料調製。具備基本英語應對能力，並保持親切態度處理顧客需求。</p>
+                  <p class="card-text">此經驗培養我在高流動場域下的應變能力，也讓我確定喜歡與人互動、解決他人問題的特質。</p>
+                  <p class="card-text"><strong>社團法人臺北市美僑協會</strong> 2023/6~2023/8 (暑假期間)</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="0" data-aos-duration="800">
+              <div class="card shadow-sm">
+                <a href="https://www.lips-hci.com/" target="_blank">
+                  <img src="work3.jpg" class="card-img-top" alt="工作經驗圖片" width="100%" height="225">
+                </a>
+                <div class="card-body">
+                  <h5 class="card-title"><strong>網站企劃編輯</strong></h5>
+                  <p class="card-text">網站改版專案，負責內容搬遷與頁面結構優化。使用WordPress 後台操作，導入關鍵字與 meta 描述等 SEO 優化策略。</p>
+                  <p class="card-text">首次參與企業專案，與產品經理、設計師及工程師定期溝通，理解專案開發節奏與合作方式。</p>
+                  <p class="card-text"><strong>立普思股份有限公司</strong> 2023/12~2024/3</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="0" data-aos-duration="800">
+              <div class="card shadow-sm">
+                <a href="https://www.daikenshop.com/?ino=NEWDK200EC" target="_blank">
+                  <img src="work4.jpg" class="card-img-top" alt="工作經驗圖片" width="100%" height="225">
+                </a>
+                <div class="card-body">
+                  <h5 class="card-title"><strong>網站測試人員</strong></h5>
+                  <p class="card-text">對收集之平台網址進行功能驗證與使用者測試，包括登入驗證、內容發佈、留言互動等。並針對無法正常操作進行錯誤報告，提升平台篩選與品質控管標準。</p>
+                  <p class="card-text">理解 Web 系統架構與用戶端的互動，熟悉測試流程的管理。</p>
+                  <p class="card-text"><strong>大研生醫國際股份有限公司</strong> 2024/6~2025/6</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+
+</main>
+
+<!-- Footer 區塊 -->
+<footer class="text-body-secondary py-4" style="background-color: #f8f9fa;">
+  <div class="container" id="contact" style="color: black;">
+    <p class="float-end mb-2">
+      <a href="#" style="color: black;">Back to top</a>
+    </p>
+    <p class="mb-3" style="font-size: 1.5rem; font-weight: bold;">聯絡方式</p>
+
+    <div class="row gx-2 gy-1 align-items-center mb-2" style="font-size: 1.1rem;">
+      <div class="col-auto d-flex align-items-center">
+        <i class="fas fa-envelope me-2"></i>
+        <a href="mailto:a0983061993@gmail.com" style="color: black;">a0983061993@gmail.com</a>
+      </div>
+      <div class="col-auto d-flex align-items-center">
+        <i class="fas fa-phone me-2"></i>
+        <a href="tel:0909909362" style="color: black;">0909-909-362</a>
+      </div>
+    </div>
+
+    <div class="row gx-2 gy-1 align-items-center" style="font-size: 1.1rem;">
+      <div class="col-auto d-flex align-items-center">
+        <i class="fab fa-instagram me-2"></i>
+        <a href="https://www.instagram.com/yunxin.118?igsh=MTRxMHpmcTgxZXlldA==" style="color: black;" target="_blank">@yunxin.118</a>
+      </div>
+      <div class="col-auto d-flex align-items-center">
+        <i class="fab fa-facebook me-2"></i>
+        <a href="https://www.facebook.com/share/1AHEwK39hN/" style="color: black;" target="_blank">Facebook</a>
+      </div>
+      <div class="col-auto d-flex align-items-center">
+        <i class="fab fa-github me-2"></i>
+        <a href="https://github.com/yunxin0118" style="color: black;" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- 先引入 Bootstrap 的 JS 套件（這是正確的） -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- 然後開一個新的 script 標籤，放你的 JavaScript 程式碼 -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            typeWriter();
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    const target = document.querySelector(".typing-text");
+    if (target) observer.observe(target);
+
+    const text = `性別女 21歲 摩羯座
+國立臺灣師範大學 科技應用與人力資源發展學系 
+雙主修資訊工程學系 大學三年級`;
+
+    let index = 0;
+
+    function typeWriter() {
+      const typingTarget = document.querySelector(".typing-text");
+      const interval = setInterval(() => {
+        if (index < text.length) {
+          typingTarget.textContent += text.charAt(index);
+          index++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 40); // 調整速度：越小越快
+    }
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate");
+            observer.unobserve(entry.target); // 只執行一次
+          }
+        });
+      },
+      { threshold: 0.3 } // 滾動到 30% 高度觸發
+    );
+  
+    document.querySelectorAll(".timeline-content").forEach((el) => {
+      observer.observe(el);
+    });
+  });
+  </script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+    </body>
+</html>
